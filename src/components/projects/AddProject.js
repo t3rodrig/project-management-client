@@ -3,9 +3,9 @@ import axios from 'axios';
 
 class AddProject extends Component {
   constructor(props){
-      super(props);
-      this.state = { title: "", description: ""};
-    }
+    super(props);
+    this.state = { title: "", description: ""};
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
