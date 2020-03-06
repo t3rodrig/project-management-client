@@ -8,14 +8,14 @@ class AddProject extends Component {
     }
 
   handleFormSubmit = (event) => {
-    event.preventDefaul();
+    event.preventDefault();
     const { title, description } = this.state;
     axios.post("http://localhost:5000/api/projects", { title, description })
-      .then( () => {
+    .then( () => {
         // this.props.getData();
         this.setState({title: "", description: ""});
-      })
-      .catch(err => console.log(err));
+    })
+    .catch( err => console.log(err) );
   }
 
   handleChange = (event) => {
