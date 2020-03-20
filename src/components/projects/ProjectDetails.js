@@ -7,9 +7,28 @@ class ProjectDetails extends Component {
     super(props);
     this.state = {};
   }
+
+  componentDidMount(){
+    this.getSingleProject();
+  }
+
+  getSingleProject = () => {
+    const { params } = this.props.match;
+    axios.get(`http://localhost:5000/api/projects/${params.id}`)
+    .then(responseFromApi => {
+      const theProject = responseFromApi.data;
+      this.setState(theProject);
+    })
+    .catch(err =>  console.log(err));
+  }
+
   render() {
     return (
-      <div>Welcome to project details page!</div>
+      <div>
+        <h1>{this.state.title}</h1>
+        <p>{this.state.description}</p>
+        <Link to='/projects'>Back to projects</Link>
+      </div>
     );
   }
 }
