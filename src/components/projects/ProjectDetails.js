@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 
+import EditProject from './EditProject';
+
 class ProjectDetails extends Component {
   constructor(props) {
     super(props);
@@ -22,11 +24,26 @@ class ProjectDetails extends Component {
     .catch(err =>  console.log(err));
   }
 
+  renderEditForm = () => {
+    if (!this.state.title){
+      this.getSingleProject();
+    } else {
+      return (
+        <EditProject 
+          theProject={this.state}
+          getTheProject={this.getSingleProject}
+          {...this.props} // so we can have 'this.props.history' in Edit.js
+        />
+      );
+    }
+  }
+
   render() {
     return (
       <div>
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
+        <div>{this.renderEditForm()}</div>
         <Link to='/projects'>Back to projects</Link>
       </div>
     );
