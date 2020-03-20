@@ -11,11 +11,11 @@ class AddProject extends Component {
     event.preventDefault();
     const { title, description } = this.state;
     axios.post("http://localhost:5000/api/projects", { title, description })
-    .then( () => {
+    .then(() => {
         this.props.getData();
         this.setState({title: "", description: ""});
     })
-    .catch( err => console.log(err) );
+    .catch(err => console.log(err));
   }
 
   handleChange = (event) => {
@@ -27,7 +27,7 @@ class AddProject extends Component {
     return (
       <div>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Tite:</label>
+          <label>Title:</label>
           <input 
             type="text" 
             name="title" 
