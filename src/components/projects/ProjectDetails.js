@@ -38,12 +38,24 @@ class ProjectDetails extends Component {
     }
   }
 
+  // DELETE PROJECT
+  deleteProject = () => {
+    const { params } = this.props.match;
+    axios.delete(`http://localhost:5000/api/projects/${params.id}`)
+    .then(() => {
+      this.props.history.push('/projects');
+    })
+    .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div>
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
         <div>{this.renderEditForm()}</div>
+        <button onClick={() => this.deleteProject()}>Delete project</button>
+        <br/>
         <Link to='/projects'>Back to projects</Link>
       </div>
     );
