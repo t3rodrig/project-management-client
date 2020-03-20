@@ -34,12 +34,14 @@ class AddProject extends Component {
             value={this.state.title}
             onChange={event => this.handleChange(event)}
           />
+          <br/>
           <label>Description:</label>
           <textarea 
             name="description" 
             value={this.state.description} 
             onChange={event => this.handleChange(event)}
           />
+          <br/>
           <input type="submit" value="Submit"/>
         </form>
       </div>

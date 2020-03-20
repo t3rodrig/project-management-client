@@ -38,7 +38,7 @@ class ProjectList extends Component {
             )
           }) }
         </div>
-        <div>
+        <div style={{width: '40%', float:"right"}}>
           <AddProject getData={() => this.getAllProjects()}/>
         </div>
       </div>
