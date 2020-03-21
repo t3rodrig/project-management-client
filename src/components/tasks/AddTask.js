@@ -27,7 +27,7 @@ class AddTask extends Component {
     .catch(err => console.log(err));
   }
 
-  handleChange = () => {
+  handleChange = (event) => {
     const {name, value} = event.target;
     this.setState({[name]: value});
   }

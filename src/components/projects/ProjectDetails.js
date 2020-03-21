@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 
 import EditProject from './EditProject';
+import AddTask from '../tasks/AddTask';
 
 class ProjectDetails extends Component {
   constructor(props) {
@@ -48,13 +49,48 @@ class ProjectDetails extends Component {
     .catch(err => console.log(err));
   }
 
+  renderAddTaskForm = () => {
+    if(!this.state.title){
+      this.getSingleProject();
+    } else {
+      // pass the project and method getSingleProject() as a props down to AddTask component
+      return (
+        <AddTask
+          theProject={this.state}
+          getTheProject={this.getSingleProject}
+        />
+      );
+    }
+  }
+
   render() {
     return (
       <div>
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
+        {/* show the task heading only if there are tasks */}
+        {this.state.tasks && this.state.tasks.length > 0 && <h3>Tasks</h3>}
+        {/* map through the array of tasks */}
+        {
+          this.state.tasks &&
+          this.state.tasks.map((task, index) => {
+            return (
+              <div key={index}>
+                <Link to={`/tasks/${task._id}`}>
+                  {task.title}
+                </Link>
+              </div>
+            )
+          })
+        }
         <div>{this.renderEditForm()}</div>
         <button onClick={() => this.deleteProject()}>Delete project</button>
+        <br/>
+        <div>{this.renderAddTaskForm()}</div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <br/>
         <Link to='/projects'>Back to projects</Link>
       </div>
