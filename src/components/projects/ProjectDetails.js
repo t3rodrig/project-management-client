@@ -17,7 +17,9 @@ class ProjectDetails extends Component {
 
   getSingleProject = () => {
     const { params } = this.props.match;
-    axios.get(`http://localhost:5000/api/projects/${params.id}`)
+    axios.get(`http://localhost:5000/api/projects/${params.id}`, { 
+      withCredentials: true 
+    })
     .then(responseFromApi => {
       const theProject = responseFromApi.data;
       this.setState(theProject);
@@ -42,7 +44,9 @@ class ProjectDetails extends Component {
   // DELETE PROJECT
   deleteProject = () => {
     const { params } = this.props.match;
-    axios.delete(`http://localhost:5000/api/projects/${params.id}`)
+    axios.delete(`http://localhost:5000/api/projects/${params.id}`, { 
+      withCredentials: true 
+    })
     .then(() => {
       this.props.history.push('/projects');
     })
