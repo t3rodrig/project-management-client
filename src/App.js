@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import ProjectList from './components/projects/ProjectList';
 import ProjectDetails from './components/projects/ProjectDetails';
+import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import AuthService from './components/auth/auth-service';
 
@@ -48,6 +49,7 @@ class App extends Component {
         <div className="App">
          <Navbar userInSession={this.state.loggedInUser} />
           <Switch>
+            <Route exact path="/" render={() => <Login getUser={this.getTheUser} />} />
             <Route exact path="/signup" render={() => <Signup getUser={this.getTheUser}/>} />
             <Route exact path="/projects" component={ProjectList} />
             <Route exact path="/projects/:id" component={ProjectDetails} />
