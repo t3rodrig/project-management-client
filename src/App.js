@@ -8,6 +8,7 @@ import ProjectDetails from './components/projects/ProjectDetails';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import AuthService from './components/auth/auth-service';
+import ProtectedRoute from './components/auth/protected-route';
 
 class App extends Component {
   constructor(props){
@@ -39,8 +40,16 @@ class App extends Component {
         <div className="App">
          <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
-            <Route exact path="/projects" component={ProjectList} />
-            <Route exact path="/projects/:id" component={ProjectDetails} />
+            <ProtectedRoute
+              path="/projects/:id"
+              component={ProjectDetails}
+              user={this.state.loggedInUser}
+            />
+            <ProtectedRoute
+              path="/projects"
+              component={ProjectList}
+              user={this.state.loggedInUser}
+            />
           </Switch>
         </div>
       );
@@ -51,8 +60,16 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => <Login getUser={this.getTheUser} />} />
             <Route exact path="/signup" render={() => <Signup getUser={this.getTheUser}/>} />
-            <Route exact path="/projects" component={ProjectList} />
-            <Route exact path="/projects/:id" component={ProjectDetails} />
+            <ProtectedRoute
+              path="/projects/:id"
+              component={ProjectDetails}
+              user={this.state.loggedInUser}
+            />
+            <ProtectedRoute
+              path="/projects"
+              component={ProjectList}
+              user={this.state.loggedInUser}
+            />
           </Switch>
         </div>
       );
